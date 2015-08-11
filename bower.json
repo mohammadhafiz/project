@@ -1,7 +1,5 @@
 {
   "name": "project",
-  "version": "1.0.0",
-  "license": "MIT",
   "dependencies": {
     "angular": "~1.4.3"
   }
