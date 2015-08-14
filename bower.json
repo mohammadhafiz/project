@@ -1,4 +1,18 @@
 {
   "name": "web-client",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.4.4",
+    "angular-animate": "~1.4.4",
+    "angular-aria": "~1.4.4",
+    "angular-message-format": "~1.4.4",
+    "angular-messages": "~1.4.4",
+    "angular-resource": "~1.4.4",
+    "angular-route": "~1.4.4",
+    "angular-sanitize": "~1.4.4",
+    "angular-material": "~0.10.1",
+    "roboto-fontface": "~0.4.3",
+    "angular-translate": "~2.7.2",
+    "material-design-icons": "~2.0.0"
+  }
 }
