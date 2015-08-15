@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="en"
-    ng-app="application">
+<html lang="en" ng-app="application">
     <head>
+        <base href="/">
         <meta content="initial-scale=no, user-scalable=no, width=device-width"
             name="viewport">
         <title>Application Title</title>
-        <link href="/vendor/vendor.min.css" rel="stylesheet">
+        <link href="/vendor.min.css" rel="stylesheet">
         <link href="/application.min.css" rel="stylesheet">
     </head>
     <body>
-        <script src="/vendor/vendor.min.js"></script>
+        <ng-view></ng-view>
+        <script src="/vendor.min.js"></script>
         <script src="/templates.min.js"></script>
         <script src="/application.min.js"></script>
     </body>

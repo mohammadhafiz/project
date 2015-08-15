@@ -25,8 +25,8 @@ var settings = {
     folder: {
         root: process.cwd(),
         vendor: {
-            root: path.join(process.cwd(), 'vendor'),
-            fonts: path.join(process.cwd(), 'vendor', 'fonts'),
+            root: path.join(process.cwd()),
+            fonts: path.join(process.cwd(), 'fonts'),
         },
     },
     htmls: [
@@ -104,9 +104,14 @@ gulp.task('javascripts', function()
 
 gulp.task('server', function()
 {
-    return connect.server({
+    var options = {
+        fallback: 'index.html',
+        host: '0.0.0.0',
         livereload: true,
-    });
+        port: 8080
+    };
+
+    return connect.server(options);
 });
 
 gulp.task('stylesheets', function()
