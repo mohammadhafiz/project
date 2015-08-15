@@ -2,14 +2,14 @@
 <html lang="en" ng-app="application">
     <head>
         <base href="/">
-        <meta content="initial-scale=no, user-scalable=no, width=device-width"
+        <meta content="initial-scale=1, user-scalable=no, width=device-width"
             name="viewport">
         <title>Application Title</title>
         <link href="/vendor.min.css" rel="stylesheet">
         <link href="/application.min.css" rel="stylesheet">
     </head>
     <body>
-        <ng-view></ng-view>
+        <ng-view layout="column" layout-fill></ng-view>
         <script src="/vendor.min.js"></script>
         <script src="/templates.min.js"></script>
         <script src="/application.min.js"></script>

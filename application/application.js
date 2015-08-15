@@ -19,6 +19,7 @@ application.config(['$locationProvider', '$routeProvider',
 
         $routeProvider
             .when('/login', {
+                controller: 'LoginController',
                 templateUrl: '/templates/login.html',
             })
             .when('/modules', {
@@ -27,4 +28,33 @@ application.config(['$locationProvider', '$routeProvider',
             .otherwise({
                 redirectTo: '/login',
             });
+    }]);
+
+application.config(['$mdThemingProvider',
+    function($mdThemingProvider)
+    {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+            .accentPalette('pink')
+            .warnPalette('orange')
+            .backgroundPalette('grey');
+
+        $mdThemingProvider.theme('indigo')
+            .primaryPalette('indigo')
+            .accentPalette('pink')
+            .warnPalette('orange')
+            .backgroundPalette('grey');
+
+        $mdThemingProvider.theme('indigoBackground')
+            .primaryPalette('indigo')
+            .accentPalette('pink')
+            .warnPalette('orange')
+            .backgroundPalette('indigo');
+    }]);
+
+application.config(['$translateProvider',
+    function($translateProvider)
+    {
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.preferredLanguage('ms');
     }]);

@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var htmlmin = require('gulp-htmlmin');
 var minifyCss = require('gulp-minify-css');
+var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
@@ -88,12 +89,14 @@ gulp.task('default', [
 gulp.task('htmls', function()
 {
     return gulp.src(settings.htmls)
+        .pipe(plumber())
         .pipe(connect.reload());
 });
 
 gulp.task('javascripts', function()
 {
     return gulp.src(settings.javascripts)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.javascripts))
         .pipe(uglify())
@@ -117,6 +120,7 @@ gulp.task('server', function()
 gulp.task('stylesheets', function()
 {
     return gulp.src(settings.stylesheets)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.stylesheets))
         .pipe(minifyCss())
@@ -133,6 +137,7 @@ gulp.task('templates', function()
     };
 
     return gulp.src(settings.templates)
+        .pipe(plumber())
         .pipe(htmlmin())
         .pipe(templateCache(settings.file.templates, options))
         .pipe(gulp.dest(settings.folder.root))
@@ -148,12 +153,14 @@ gulp.task('vendor', [
 gulp.task('vendor:fonts', function()
 {
     return gulp.src(settings.vendor.fonts)
+        .pipe(plumber())
         .pipe(gulp.dest(settings.folder.vendor.fonts));
 });
 
 gulp.task('vendor:javascripts', function()
 {
     return gulp.src(settings.vendor.javascripts)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.vendor.javascripts))
         .pipe(uglify())
@@ -164,6 +171,7 @@ gulp.task('vendor:javascripts', function()
 gulp.task('vendor:stylesheets', function()
 {
     return gulp.src(settings.vendor.stylesheets)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.vendor.stylesheets))
         .pipe(minifyCss())
