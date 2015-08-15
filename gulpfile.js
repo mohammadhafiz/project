@@ -20,6 +20,7 @@ var settings = {
     folder: {
         root: process.cwd(),
         vendor: {
+            root: path.join(process.cwd(), 'vendor'),
             fonts: path.join(process.cwd(), 'vendor', 'fonts'),
         },
     },
@@ -79,8 +80,8 @@ gulp.task('vendor:javascripts', function()
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.vendor.javascripts))
         .pipe(uglify())
-        .pipe(sourcemaps.write(settings.folder.root))
-        .pipe(gulp.dest(settings.folder.root));
+        .pipe(sourcemaps.write(settings.folder.vendor.root))
+        .pipe(gulp.dest(settings.folder.vendor.root));
 });
 
 gulp.task('vendor:stylesheets', function()
@@ -89,6 +90,6 @@ gulp.task('vendor:stylesheets', function()
         .pipe(sourcemaps.init())
         .pipe(concat(settings.file.vendor.stylesheets))
         .pipe(minifyCss())
-        .pipe(sourcemaps.write(settings.folder.root))
-        .pipe(gulp.dest(settings.folder.root));
+        .pipe(sourcemaps.write(settings.folder.vendor.root))
+        .pipe(gulp.dest(settings.folder.vendor.root));
 });
