@@ -1,9 +1,16 @@
-application.controller('LoginController', ['$location', '$scope',
-    function($location, $scope)
+application.controller('LoginController', ['$location', '$scope', 'Auth',
+    function($location, $scope, Auth)
     {
-        $scope.login = function()
+        $scope.data = {
+            username: 'root',
+            password: 'password',
+        };
+
+        $scope.login = function(credentials)
         {
-            console.log('Log in');
-            $location.path('/modules');
+                    $location.path('/modules');
+            // Auth.verify(credentials)
+            //     .then(function (session) {
+            //     });
         };
     }]);

@@ -1,12 +1,11 @@
 <md-content flex
     layout="row"
-    layout-align="center center"
-    md-theme="indigoBackground">
-    <md-card flex
+    layout-align="center center">
+    <md-card class="md-whiteframe-z5"
+        flex
         flex-gt-sm="80"
         flex-gt-md="60"
-        flex-gt-lg="40"
-        md-theme="indigo">
+        flex-gt-lg="40">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2><span class="title">{{ 'title_login' | translate }}</span>
@@ -14,22 +13,44 @@
         </md-toolbar>
         <md-card-content>
             <form name="loginForm"
-                ng-submit="login()">
+                ng-submit="login(data)">
                 <md-input-container>
                     <label>{{ 'label_username' | translate }}</label>
                     <input autofocus
+                        name="username"
                         ng-model="data.username"
+                        required
+                        minlength="4"
+                        maxlength="24"
                         type="text">
+                    <div ng-if="loginForm.$submitted || loginForm.username.$touched"
+                        ng-messages="loginForm.username.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-Message="maxlength">{{ 'validation_maxlength_24' | translate }}</div>
+                    </div>
                 </md-input-container>
 
                 <md-input-container>
                     <label>{{ 'label_password' | translate }}</label>
-                    <input ng-model="data.password"
+                    <input name="password"
+                        ng-model="data.password"
+                        required
+                        minlength="4"
+                        maxlength="24"
                         type="password">
+                    <div ng-if="loginForm.$submitted || loginForm.password.$touched"
+                        ng-messages="loginForm.password.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-Message="maxlength">{{ 'validation_maxlength_24' | translate }}</div>
+                    </div>
                 </md-input-container>
 
                 <div layout="row" layout-align="end center">
-                    <md-button aria-label="{{ 'button_login' | translate }}" class="md-fab">
+                    <md-button aria-label="{{ 'action_login' | translate }}"
+                        class="md-fab"
+                        ng-show="loginForm.$valid">
                         <md-icon>arrow_forward</md-icon>
                     </md-button>
                 </div>

@@ -23,7 +23,10 @@ application.config(['$locationProvider', '$routeProvider',
                 templateUrl: '/templates/login.html',
             })
             .when('/modules', {
+                controller: 'ModulesController',
                 templateUrl: '/templates/modules.html',
+            })
+            .when('/access_control', {
             })
             .otherwise({
                 redirectTo: '/login',
@@ -56,5 +59,5 @@ application.config(['$translateProvider',
     function($translateProvider)
     {
         $translateProvider.useSanitizeValueStrategy('sanitize');
-        $translateProvider.preferredLanguage('ms');
+        $translateProvider.preferredLanguage('en');
     }]);

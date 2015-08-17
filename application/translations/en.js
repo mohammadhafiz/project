@@ -2,9 +2,22 @@ application.config(['$translateProvider',
     function($translateProvider)
     {
         $translateProvider.translations('en', {
-            'title_login': 'Log in',
-            'label_username': 'Username',
+            'action_login': 'Log in',
+            'action_logout': 'Log out',
+
             'label_password': 'Password',
-            'button_login': 'Log in',
+            'label_username': 'Username',
+
+            'placeholder': 'Placeholder',
+
+            'title_access_control': 'Access Control',
+            'title_arrears_management': 'Arrears Management',
+            'title_login': 'Login',
+            'title_modules': 'Modules',
+            'title_settings': 'Settings',
+
+            'validation_maxlength_24': 'This field may not be greater than 24 characters.',
+            'validation_minlength_4': 'This field must be at least 4 characters.',
+            'validation_required': 'This field is required.',
         });
     }]);
