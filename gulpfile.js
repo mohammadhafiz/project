@@ -24,10 +24,10 @@ var settings = {
         },
     },
     folder: {
-        root: process.cwd(),
+        root: '.',
         vendor: {
-            root: path.join(process.cwd()),
-            fonts: path.join(process.cwd(), 'fonts'),
+            root: '.',
+            fonts: 'fonts',
         },
     },
     htmls: [
