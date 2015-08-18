@@ -13,12 +13,12 @@
         </md-toolbar>
         <md-card-content>
             <form name="loginForm"
-                ng-submit="login(data)">
+                ng-submit="login(credentials)">
                 <md-input-container>
                     <label>{{ 'label_username' | translate }}</label>
                     <input autofocus
                         name="username"
-                        ng-model="data.username"
+                        ng-model="credentials.username"
                         required
                         minlength="4"
                         maxlength="24"
@@ -34,7 +34,7 @@
                 <md-input-container>
                     <label>{{ 'label_password' | translate }}</label>
                     <input name="password"
-                        ng-model="data.password"
+                        ng-model="credentials.password"
                         required
                         minlength="4"
                         maxlength="24"

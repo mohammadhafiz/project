@@ -1,12 +1,6 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
         <h2><span class="md-title">{{ 'title_modules' | translate }}</span></h2>
-        <span flex></span>
-        <md-button aria-label="{{ 'modules_toolbar_button_logout' | translate }}"
-            class="md-icon-button"
-            ng-click="logout()">
-            <md-icon>close</md-icon>
-        </md-button>
     </div>
 </md-toolbar>
 <md-content flex
@@ -55,6 +49,15 @@
             <md-icon class="material-icons md-light md-48">code</md-icon>
             <md-grid-tile-footer>
                 <h3>{{ 'placeholder' | translate }}</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+        <md-grid-tile aria-label="{{ 'action_logout' | translate }}"
+            class="app-pointer"
+            md-ink-ripple
+            ng-click="logout()">
+            <md-icon class="material-icons md-light md-48">exit_to_app</md-icon>
+            <md-grid-tile-footer>
+                <h3>{{ 'action_logout' | translate }}</h3>
             </md-grid-tile-footer>
         </md-grid-tile>
     </md-grid-list>
