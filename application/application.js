@@ -57,6 +57,22 @@ application.config(['$locationProvider', '$routeProvider',
             });
     }]);
 
+application.run(['$location', '$rootScope',
+    function($location, $rootScope)
+    {
+        $rootScope.$on('$routeChangeError', function(event, current, previous, rejection)
+        {
+            switch (rejection) {
+                case 'guest_only':
+                    $location.path('/modules');
+                    break;
+                case 'member_only':
+                    $location.path('/login');
+                    break;
+            }
+        });
+    }]);
+
 application.config(['$mdThemingProvider',
     function($mdThemingProvider)
     {
@@ -105,20 +121,4 @@ application.config(['$httpProvider',
         };
 
         $httpProvider.interceptors.push('AuthInterceptor');
-    }]);
-
-application.run(['$location', '$rootScope',
-    function($location, $rootScope)
-    {
-        $rootScope.$on('$routeChangeError', function(event, current, previous, rejection)
-        {
-            switch (rejection) {
-                case 'guest_only':
-                    $location.path('/modules');
-                    break;
-                case 'member_only':
-                    $location.path('/login');
-                    break;
-            }
-        });
     }]);

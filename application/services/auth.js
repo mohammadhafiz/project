@@ -1,5 +1,5 @@
-application.factory('Auth', ['$http', '$q', '$window', 'API', 'Error', 'Settings',
-    function($http, $q, $window, API, Error, Settings)
+application.factory('Auth', ['$http', '$location', '$q', '$window', 'API', 'Settings',
+    function($http, $location, $q, $window, API, Settings)
     {
         var auth = {};
 
@@ -11,6 +11,7 @@ application.factory('Auth', ['$http', '$q', '$window', 'API', 'Error', 'Settings
             $window.localStorage.removeItem('access_token');
             $window.localStorage.removeItem('refresh_token');
             $window.localStorage.removeItem('token_type');
+            $location.path('/');
 
             deferred.resolve();
 
@@ -24,11 +25,6 @@ application.factory('Auth', ['$http', '$q', '$window', 'API', 'Error', 'Settings
             $window.localStorage.refresh_token   = response.data.refresh_token;
             $window.localStorage.token_type      = response.data.token_type;
             return response;
-        };
-
-        auth.handle = function()
-        {
-            return auth.handler;
         };
 
         auth.isLogged = function()
@@ -50,8 +46,7 @@ application.factory('Auth', ['$http', '$q', '$window', 'API', 'Error', 'Settings
             };
 
             return $http.post(API.get('access_token'), data)
-                .then(auth.handle())
-                .catch(Error.handle());
+                .then(auth.handler);
         };
 
         auth.verify = function(credentials)
@@ -66,25 +61,22 @@ application.factory('Auth', ['$http', '$q', '$window', 'API', 'Error', 'Settings
             };
 
             return $http.post(API.get('access_token'), data)
-                .then(auth.handle())
-                .catch(Error.handle());
+                .then(auth.handler);
         };
 
         return auth;
     }]);
 
-application.factory('AuthInterceptor', ['$q', '$window',
-    function($q, $window)
+application.factory('AuthInterceptor', ['$injector', '$q', '$translate', '$window',
+    function($injector, $q, $translate, $window)
     {
+        var refreshPromise = null;
+
         var authInterceptor = {};
 
         authInterceptor.request = function(config)
         {
-            if ($window.localStorage.hasOwnProperty('expires_in') &&
-                $window.localStorage.hasOwnProperty('access_token') &&
-                $window.localStorage.hasOwnProperty('refresh_token') &&
-                $window.localStorage.hasOwnProperty('token_type')) {
-
+            if ($injector.get('Auth').isLogged()) {
                 var token_type = $window.localStorage.token_type;
                 var access_token = $window.localStorage.access_token;
                 config.headers.Authorization = token_type + ' ' + access_token;
@@ -96,7 +88,38 @@ application.factory('AuthInterceptor', ['$q', '$window',
         authInterceptor.responseError = function(rejection)
         {
             console.error(rejection);
-            return $q.reject(reject);
+
+            switch (rejection.status) {
+                case 401:
+                    refreshPromise = refreshPromise ? refreshPromise :
+                        $injector.get('Auth').refresh();
+
+                    return refreshPromise.finally(function()
+                        {
+                            refreshPromise = null;
+                        })
+                        .then(function()
+                        {
+                            return $injector.get('$http')(rejection.config);
+                        });
+                case 500:
+                    if (rejection.data.message == 'The user credentials were incorrect.') {
+                        $translate('toast_incorrect_credentials')
+                            .then(function(text)
+                            {
+                                var $mdToast = $injector.get('$mdToast');
+                                var toast = $mdToast.simple()
+                                    .content(text)
+                                    .position('bottom left right');
+                                $mdToast.show(toast);
+                            });
+
+                        return $q.reject(rejection);
+                    }
+
+                    return $injector.get('Auth')
+                        .forget();
+            }
         };
 
         return authInterceptor;
