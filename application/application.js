@@ -50,7 +50,9 @@ application.config(['$locationProvider', '$routeProvider',
                     }],
                 },
             })
-            .when('/access_control', {
+            .when('/access_control/users', {
+                controller: 'AccessControlUsersIndex',
+                templateUrl: '/templates/access_control_users_index.html',
             })
             .otherwise({
                 redirectTo: '/login',

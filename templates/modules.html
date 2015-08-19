@@ -15,7 +15,10 @@
         md-cols-gt-md="4"
         md-cols-gt-lg="5"
         md-row-height="1:1">
-        <md-grid-tile mg-theme="indigoBackground">
+        <md-grid-tile aria-label="{{ 'title_access_control' | translate }}"
+            class="app-pointer"
+            md-ink-ripple
+            ng-click="accessControl()">
             <md-icon class="material-icons md-light md-48">vpn_key</md-icon>
             <md-grid-tile-footer>
                 <h3>{{ 'title_access_control' | translate }}</h3>

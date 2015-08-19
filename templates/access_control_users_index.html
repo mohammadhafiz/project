@@ -1,0 +1,55 @@
+<md-content flex layout="row">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                    ng-click="modules()">
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <h2>
+                    <span class="md-title">Modules</span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <md-list flex>
+            <md-list-item>
+                <md-icon>people</md-icon>
+                <p>User Management</p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>apps</md-icon>
+                <p>Client Management</p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>folder_special</md-icon>
+                <p>Grant Management</p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>verified_user</md-icon>
+                <p>Scope Management</p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <md-content flex layout="column">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                    ng-click="menu()">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h2>
+                    <span class="md-title">Users Management</span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <md-content flex>
+            <md-list>
+                <md-list-item ng-repeat="user in users.data track by user.id">
+                    <p> {{ user.username }}</p>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-content>
+</md-content>

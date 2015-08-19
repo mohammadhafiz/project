@@ -1,18 +1,19 @@
-application.controller('ModulesController', ['$location', '$scope', '$timeout', 'Auth', 'User',
-    function($location, $scope, $timeout, Auth, User)
+application.controller('ModulesController', ['$location', '$scope', '$timeout', 'Auth',
+    function($location, $scope, $timeout, Auth)
     {
-        var users = User.query();
-        users.$promise
-            .then(function(users)
+        $scope.accessControl = function()
+        {
+            $timeout(function()
             {
-                console.log(users);
-            });
+                $location.path('/access_control/users');
+            }, 500);
+        };
 
         $scope.logout = function()
         {
             $timeout(function()
             {
                 Auth.forget();
-            }, 300);
+            }, 500);
         };
     }]);
