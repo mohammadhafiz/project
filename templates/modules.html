@@ -1,5 +1,5 @@
 <md-toolbar>
-    <div class="md-toolbar-tools">
+    <div class="md-toolbar-tools md-whiteframe-z2">
         <h2><span class="md-title">{{ 'title_modules' | translate }}</span></h2>
     </div>
 </md-toolbar>
@@ -16,7 +16,7 @@
         md-cols-gt-lg="5"
         md-row-height="1:1">
         <md-grid-tile aria-label="{{ 'title_access_control' | translate }}"
-            class="app-pointer"
+            class="app-background-red app-pointer"
             md-ink-ripple
             ng-click="accessControl()">
             <md-icon class="material-icons md-light md-48">vpn_key</md-icon>
@@ -55,7 +55,7 @@
             </md-grid-tile-footer>
         </md-grid-tile>
         <md-grid-tile aria-label="{{ 'action_logout' | translate }}"
-            class="app-pointer"
+            class="app-background-pink app-pointer"
             md-ink-ripple
             ng-click="logout()">
             <md-icon class="material-icons md-light md-48">exit_to_app</md-icon>

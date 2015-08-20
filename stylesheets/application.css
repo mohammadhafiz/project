@@ -1,3 +1,15 @@
+.highlight {
+    font-weight: bold;
+}
+
+.app-background-pink {
+    background-color: #E91E63;
+}
+
+.app-background-red {
+    background-color: #F44336;
+}
+
 .app-pointer {
     cursor: pointer;
 }

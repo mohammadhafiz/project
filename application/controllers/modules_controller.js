@@ -1,5 +1,5 @@
-application.controller('ModulesController', ['$location', '$scope', '$timeout', 'Auth',
-    function($location, $scope, $timeout, Auth)
+application.controller('ModulesController', ['$location', '$scope', '$timeout', 'Auth', 'isLogged', 'session',
+    function($location, $scope, $timeout, Auth, isLogged, session)
     {
         $scope.accessControl = function()
         {

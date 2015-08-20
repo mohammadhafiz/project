@@ -1,5 +1,5 @@
-application.controller('LoginController', ['$location', '$scope', 'Auth',
-    function($location, $scope, Auth)
+application.controller('LoginController', ['$location', '$scope', 'Auth', 'isGuest',
+    function($location, $scope, Auth, isGuest)
     {
         $scope.credentials = {
             username: '',

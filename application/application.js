@@ -22,15 +22,9 @@ application.config(['$locationProvider', '$routeProvider',
                 controller: 'LoginController',
                 templateUrl: '/templates/login.html',
                 resolve: {
-                    guest_only: ['$q', 'Auth', function($q, Auth)
+                    isGuest: ['Auth', function(Auth)
                     {
-                        var deferred = $q.defer();
-                        if (! Auth.isLogged()) {
-                            deferred.resolve();
-                        } else {
-                            deferred.reject('guest_only');
-                        }
-                        return deferred.promise;
+                        return Auth.isGuest();
                     }],
                 },
             })
@@ -38,38 +32,46 @@ application.config(['$locationProvider', '$routeProvider',
                 controller: 'ModulesController',
                 templateUrl: '/templates/modules.html',
                 resolve: {
-                    member_only: ['$q', 'Auth', function($q, Auth)
+                    isLogged: ['Auth', function(Auth)
                     {
-                        var deferred = $q.defer();
-                        if (Auth.isLogged()) {
-                            deferred.resolve();
-                        } else {
-                            deferred.reject('member_only');
-                        }
-                        return deferred.promise;
+                        return Auth.isLogged();
+                    }],
+                    session: ['Auth', function(Auth)
+                    {
+                        return Auth.session();
                     }],
                 },
             })
             .when('/access_control/users', {
                 controller: 'AccessControlUsersIndex',
                 templateUrl: '/templates/access_control_users_index.html',
+                resolve: {
+                    isLogged: ['Auth', function(Auth)
+                    {
+                        return Auth.isLogged();
+                    }],
+                },
+            })
+            .when('/access_control/users/add', {
+                controller: 'AccessControlUsersCreate',
+                templateUrl: '/templates/access_control_users_create.html',
             })
             .otherwise({
                 redirectTo: '/login',
             });
     }]);
 
-application.run(['$location', '$rootScope',
-    function($location, $rootScope)
+application.run(['$location', '$rootScope', 'Auth',
+    function($location, $rootScope, Auth)
     {
         $rootScope.$on('$routeChangeError', function(event, current, previous, rejection)
         {
             switch (rejection) {
-                case 'guest_only':
+                case 'auth.is_guest':
                     $location.path('/modules');
                     break;
-                case 'member_only':
-                    $location.path('/login');
+                case 'auth.is_logged':
+                    Auth.forget();
                     break;
             }
         });
@@ -78,23 +80,17 @@ application.run(['$location', '$rootScope',
 application.config(['$mdThemingProvider',
     function($mdThemingProvider)
     {
-        $mdThemingProvider.theme('default')
-            .primaryPalette('indigo')
-            .accentPalette('pink')
-            .warnPalette('orange')
-            .backgroundPalette('grey');
+        $mdThemingProvider.alwaysWatchTheme(true);
 
-        $mdThemingProvider.theme('indigo')
-            .primaryPalette('indigo')
-            .accentPalette('pink')
-            .warnPalette('orange')
-            .backgroundPalette('grey');
+        $mdThemingProvider.theme('red')
+            .primaryPalette('red')
+            .accentPalette('blue');
 
-        $mdThemingProvider.theme('indigoBackground')
-            .primaryPalette('indigo')
-            .accentPalette('pink')
-            .warnPalette('orange')
-            .backgroundPalette('indigo');
+        $mdThemingProvider.theme('white')
+            .primaryPalette('grey', {
+                default: '200',
+            })
+            .accentPalette('blue');
     }]);
 
 application.config(['$translateProvider',

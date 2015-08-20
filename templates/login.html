@@ -48,10 +48,9 @@
                 </md-input-container>
 
                 <div layout="row" layout-align="end center">
-                    <md-button aria-label="{{ 'action_login' | translate }}"
-                        class="md-fab"
-                        ng-show="loginForm.$valid">
-                        <md-icon>arrow_forward</md-icon>
+                    <md-button class="md-accent"
+                         ng-show="loginForm.$valid">
+                        {{ 'action_login' | translate }}
                     </md-button>
                 </div>
             </form>

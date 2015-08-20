@@ -1,55 +1,78 @@
-<md-content flex layout="row">
+<md-content flex
+    layout="row"
+    md-theme="{{ theme }}">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2"
-        md-component-id="left"
+        md-component-id="menu"
         md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button"
-                    ng-click="modules()">
-                    <md-icon>arrow_back</md-icon>
-                </md-button>
-                <h2>
-                    <span class="md-title">Modules</span>
-                </h2>
-            </div>
-        </md-toolbar>
         <md-list flex>
-            <md-list-item>
-                <md-icon>people</md-icon>
-                <p>User Management</p>
-            </md-list-item>
-            <md-list-item>
+            <md-subheader class="md-no-sticky">{{ 'title_actions' | translate }}</md-subheader>
+            <md-list-item ng-click="modules()">
                 <md-icon>apps</md-icon>
-                <p>Client Management</p>
+                <p>{{ 'title_modules' | translate }}</p>
+            </md-list-item>
+            <md-list-item ng-click="userManagement()">
+                <md-icon>people</md-icon>
+                <p>{{ 'title_user_management' | translate }}</p>
             </md-list-item>
             <md-list-item>
-                <md-icon>folder_special</md-icon>
-                <p>Grant Management</p>
+                <md-icon>vpn_key</md-icon>
+                <p>{{ 'title_client_management' | translate }}</p>
             </md-list-item>
             <md-list-item>
-                <md-icon>verified_user</md-icon>
-                <p>Scope Management</p>
+                <md-icon>lock</md-icon>
+                <p>{{ 'title_grant_management' | translate }}</p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>perm_data_setting</md-icon>
+                <p>{{ 'title_scope_management' | translate }}</p>
             </md-list-item>
         </md-list>
     </md-sidenav>
+
     <md-content flex layout="column">
-        <md-toolbar>
-            <div class="md-toolbar-tools">
+        <md-toolbar class="md-whiteframe-z2">
+            <div class="md-toolbar-tools" ng-if="theme == 'red'">
                 <md-button class="md-icon-button"
+                    hide-gt-md
                     ng-click="menu()">
+                    <md-tooltip>{{ 'action_menu' | translate }}</md-tooltip>
                     <md-icon>menu</md-icon>
                 </md-button>
-                <h2>
-                    <span class="md-title">Users Management</span>
-                </h2>
+                <h2 class="md-title">{{ 'title_user_management' | translate }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                    ng-click="$parent.theme = 'white'">
+                    <md-tooltip>{{ 'action_search' | translate }}</md-tooltip>
+                    <md-icon>search</md-icon>
+                </md-button>
+                <md-button class="md-icon-button"
+                    ng-click="add()">
+                    <md-tooltip>{{ 'action_add' | translate }}</md-tooltip>
+                    <md-icon>person_add</md-icon>
+                </md-button>
+            </div>
+
+            <div class="md-toolbar-tools" ng-if="theme == 'white'">
+                <md-button class="md-icon-button"
+                    ng-click="$parent.theme = 'red'">
+                    <md-tooltip>{{ 'action_back' | translate }}</md-tooltip>
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <md-input-container flex md-no-float>
+                    <br>
+                    <input ng-model="$parent.query.username"
+                        placeholder="Search"
+                        type="search">
+                </md-input-container>
             </div>
         </md-toolbar>
-        <md-content flex>
-            <md-list>
-                <md-list-item ng-repeat="user in users.data track by user.id">
-                    <p> {{ user.username }}</p>
-                </md-list-item>
-            </md-list>
-        </md-content>
+        <md-list flex md-virtual-repeat-container>
+            <md-list-item md-virtual-repeat="user in users | filter:query:regex | orderBy:'username'">
+                <md-icon>person</md-icon>
+                <p md-highlight-text="query.username"
+                    md-highlight-flags="gi">{{ user.username }}</p>
+                <md-icon>more_vert</md-icon>
+            </md-list-item>
+        </md-list>
     </md-content>
 </md-content>
