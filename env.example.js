@@ -1,4 +1,5 @@
-application.factory('Settings', [
+angular.module('application.settings', [])
+    .factory('Settings', [
     function()
     {
         var settings = {};

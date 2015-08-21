@@ -65,7 +65,9 @@ application.config(['$locationProvider', '$routeProvider',
                     }],
                 },
             })
-            .when('/access_control/clients', {})
+            .when('/access_control/clients', {
+
+            })
             .when('/access_control/grants', {})
             .when('/access_control/scopes', {})
             .otherwise({

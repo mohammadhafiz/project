@@ -1,0 +1,9 @@
+<md-content flex
+    layout="row"
+    md-theme="{{ theme }}">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+        md-component-id="menu"
+        md-is-locked-open="$mdMedia('gt-md')">
+        <ng-include src="'access_control.html'"></ng-include>
+    </md-sidenav>
+</md-content>
