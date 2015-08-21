@@ -4,33 +4,11 @@
     <md-sidenav class="md-sidenav-left md-whiteframe-z2"
         md-component-id="menu"
         md-is-locked-open="$mdMedia('gt-md')">
-        <md-list flex>
-            <md-subheader class="md-no-sticky">{{ 'title_actions' | translate }}</md-subheader>
-            <md-list-item ng-click="modules()">
-                <md-icon>apps</md-icon>
-                <p>{{ 'title_modules' | translate }}</p>
-            </md-list-item>
-            <md-list-item ng-click="userManagement()">
-                <md-icon>people</md-icon>
-                <p>{{ 'title_user_management' | translate }}</p>
-            </md-list-item>
-            <md-list-item>
-                <md-icon>vpn_key</md-icon>
-                <p>{{ 'title_client_management' | translate }}</p>
-            </md-list-item>
-            <md-list-item>
-                <md-icon>lock</md-icon>
-                <p>{{ 'title_grant_management' | translate }}</p>
-            </md-list-item>
-            <md-list-item>
-                <md-icon>perm_data_setting</md-icon>
-                <p>{{ 'title_scope_management' | translate }}</p>
-            </md-list-item>
-        </md-list>
+        <ng-include src="'access_control.html'"></ng-include>
     </md-sidenav>
 
-    <md-content flex layout="column">
-        <md-toolbar class="md-whiteframe-z2">
+    <md-content flex layout="column" style="min-height: 250px">
+        <md-toolbar class="md-whiteframe-z2" md-scroll-shrink>
             <div class="md-toolbar-tools" ng-if="theme == 'red'">
                 <md-button class="md-icon-button"
                     hide-gt-md
@@ -47,7 +25,7 @@
                 </md-button>
                 <md-button class="md-icon-button"
                     ng-click="add()">
-                    <md-tooltip>{{ 'action_add' | translate }}</md-tooltip>
+                    <md-tooltip>{{ 'action_add_user' | translate }}</md-tooltip>
                     <md-icon>person_add</md-icon>
                 </md-button>
             </div>
@@ -67,11 +45,28 @@
             </div>
         </md-toolbar>
         <md-list flex md-virtual-repeat-container>
-            <md-list-item md-virtual-repeat="user in users | filter:query:regex | orderBy:'username'">
+            <md-subheader class="md-no-sticky">{{ 'title_record_count' | translate:data }}</md-subheader>
+            <md-list-item ng-click="read(user.id)"
+                md-virtual-repeat="user in data = (users | filter:query:regex | orderBy:'username')">
                 <md-icon>person</md-icon>
                 <p md-highlight-text="query.username"
                     md-highlight-flags="gi">{{ user.username }}</p>
-                <md-icon>more_vert</md-icon>
+                <md-menu md-position-mode="target-right target">
+                    <md-button aria-label="{{ 'action_more' | translate }}"
+                        class="md-icon-button"
+                        ng-click="$mdOpenMenu($event)">
+                        <md-tooltip>{{ 'action_more' | translate }}</md-tooltip>
+                        <md-icon>more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="delete($event, user)">
+                                <md-icon>delete</md-icon>
+                                {{ 'action_delete' | translate }}
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </md-list-item>
         </md-list>
     </md-content>

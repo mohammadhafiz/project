@@ -1,0 +1,24 @@
+<md-list flex
+    ng-controller="AccessControlController">
+    <md-subheader class="md-no-sticky">{{ 'title_menu' | translate }}</md-subheader>
+    <md-list-item ng-click="modules()">
+        <md-icon>apps</md-icon>
+        <p>{{ 'title_modules' | translate }}</p>
+    </md-list-item>
+    <md-list-item ng-click="userManagement()">
+        <md-icon>people</md-icon>
+        <p>{{ 'title_user_management' | translate }}</p>
+    </md-list-item>
+    <md-list-item ng-click="clientManagement()">
+        <md-icon>vpn_key</md-icon>
+        <p>{{ 'title_client_management' | translate }}</p>
+    </md-list-item>
+    <md-list-item ng-click="grantManagement()">
+        <md-icon>lock</md-icon>
+        <p>{{ 'title_grant_management' | translate }}</p>
+    </md-list-item>
+    <md-list-item ng-click="scopeManagement()">
+        <md-icon>perm_data_setting</md-icon>
+        <p>{{ 'title_scope_management' | translate }}</p>
+    </md-list-item>
+</md-list>

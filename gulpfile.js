@@ -35,8 +35,9 @@ var settings = {
     ],
     javascripts: [
         'application/application.js',
+        'application/routes.js',
         'application/translations/*.js',
-        'application/controllers/*.js',
+        'application/controllers/**/*.js',
         'application/directives/*.js',
         'application/filters/*.js',
         'application/providers/*.js',
@@ -47,7 +48,7 @@ var settings = {
         'stylesheets/application.css',
     ],
     templates: [
-        'templates/*.html',
+        'templates/**/*.html',
     ],
     vendor: {
         fonts: [

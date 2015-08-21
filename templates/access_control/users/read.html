@@ -1,0 +1,56 @@
+<md-content flex
+    layout="row"
+    md-theme="red">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+        md-is-locked-open="$mdMedia('gt-md')">
+        <ng-include src="'access_control.html'"></ng-include>
+    </md-sidenav>
+
+    <md-content flex
+        layout="column">
+        <md-toolbar class="md-whiteframe-z2">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                    ng-click="back()">
+                    <md-tooltip>{{ 'action_back' | translate }}</md-tooltip>
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <h2 class="md-title">{{ user.username }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                    ng-click="delete($event, user.id)">
+                    <md-tooltip>{{ 'action_delete' | translate }}</md-tooltip>
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-content flex>
+            <md-list>
+                <md-list-item class="md-2-line"
+                    md-ink-ripple>
+                    <div class="md-list-item-text">
+                        <h3>{{ 'label_username' | translate }}</h3>
+                        <p>{{ user.username }}</p>
+                    </div>
+                </md-list-item>
+
+                <md-list-item class="md-2-line"
+                    md-ink-ripple>
+                    <div class="md-list-item-text">
+                        <h3>{{ 'label_created_at' | translate }}</h3>
+                        <p>{{ user.created_at }}</p>
+                    </div>
+                </md-list-item>
+
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text"
+                    md-ink-ripple>
+                        <h3>{{ 'label_updated_at' | translate }}</h3>
+                        <p>{{ user.updated_at }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-content>
+</md-content>

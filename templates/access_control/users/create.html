@@ -1,0 +1,87 @@
+<md-content flex
+    layout="row"
+    md-theme="red">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+        md-is-locked-open="$mdMedia('gt-md')">
+        <ng-include src="'access_control.html'"></ng-include>
+    </md-sidenav>
+
+    <md-content flex
+        layout="column">
+        <md-toolbar class="md-whiteframe-z2">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                    ng-click="back()">
+                    <md-tooltip>{{ 'action_back' | translate }}</md-tooltip>
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <h2 class="md-title">{{ 'action_add_user' | translate }}</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content flex
+            layout="row"
+            layout-align="center start"
+            layout-padding>
+            <form flex
+                flex-gt-sm="90"
+                flex-gt-md="80"
+                flex-gt-lg="70"
+                name="addForm"
+                ng-submit="add(data)">
+                <md-input-container>
+                    <label>{{ 'label_username' | translate }}</label>
+                    <input name="username"
+                        autofocus
+                        ng-model="data.username"
+                        required
+                        minlength="4"
+                        maxlength="24"
+                        type="text">
+                    <div ng-if="addForm.$submitted || addForm.username.$touched"
+                        ng-messages="addForm.username.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-Message="maxlength">{{ 'validation_maxlength_24' | translate }}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>{{ 'label_password' | translate }}</label>
+                    <input name="password"
+                        ng-model="data.password"
+                        required
+                        minlength="4"
+                        maxlength="24"
+                        type="password">
+                    <div ng-if="addForm.$submitted || addForm.password.$touched"
+                        ng-messages="addForm.password.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-Message="maxlength">{{ 'validation_maxlength_24' | translate }}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>{{ 'label_password_confirmation' | translate }}</label>
+                    <input name="password_confirmation"
+                        ng-model="data.password_confirmation"
+                        required
+                        minlength="4"
+                        maxlength="24"
+                        type="password">
+                    <div ng-if="addForm.$submitted || addForm.password.$touched"
+                        ng-messages="addForm.password.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-Message="maxlength">{{ 'validation_maxlength_24' | translate }}</div>
+                    </div>
+                </md-input-container>
+
+                <div layout="row" layout-align="end center">
+                    <md-button class="md-accent md-raised">
+                        {{ 'action_add_user' | translate }}
+                    </md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-content>
+</md-content>

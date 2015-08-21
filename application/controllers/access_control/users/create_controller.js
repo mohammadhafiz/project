@@ -1,4 +1,4 @@
-application.controller('AccessControlUsersCreate', ['$location', '$scope', 'User',
+application.controller('AccessControlUsersCreateController', ['$location', '$scope', 'User',
     function($location, $scope, User)
     {
         $scope.data = {
