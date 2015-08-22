@@ -1,0 +1,58 @@
+<md-content flex
+    layout="row"
+    md-theme="red">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+        md-is-locked-open="$mdMedia('gt-md')">
+        <ng-include src="'access_control.html'"></ng-include>
+    </md-sidenav>
+
+    <md-content flex
+        layout="column">
+        <md-toolbar class="md-whiteframe-z2">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                    ng-click="back()">
+                    <md-tooltip>{{ 'action_back' | translate }}</md-tooltip>
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <h2 class="md-title">{{ 'action_create' | translate }}</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content flex
+            layout="row"
+            layout-align="center start"
+            layout-padding>
+            <form flex
+                flex-gt-sm="90"
+                flex-gt-md="80"
+                flex-gt-lg="70"
+                name="createForm"
+                ng-submit="create(data)">
+                <md-input-container>
+                    <label>{{ 'label_name' | translate }}</label>
+                    <input name="name"
+                        autofocus
+                        ng-model="data.name"
+                        required
+                        minlength="4"
+                        md-maxlength="250"
+                        type="text">
+                    <div ng-if="createForm.$submitted || createForm.name.$touched"
+                        ng-messages="createForm.name.$error">
+                        <div ng-message="required">{{ 'validation_required' | translate }}</div>
+                        <div ng-message="minlength">{{ 'validation_minlength_4' | translate }}</div>
+                        <div ng-message="md-maxlength">{{ 'validation_maxlength_250' | translate }}</div>
+                    </div>
+                </md-input-container>
+
+                <div layout="row"
+                    layout-align="end center">
+                    <md-button class="md-accent md-raised">
+                        {{ 'action_create' | translate }}
+                    </md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-content>
+</md-content>
