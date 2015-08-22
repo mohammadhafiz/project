@@ -6,9 +6,9 @@ application.controller('AccessControlClientsController', ['$location', '$mdDialo
         $scope.theme = 'red';
         $scope.clients = [];
 
-        $scope.add = function()
+        $scope.create = function()
         {
-            $location.path('/access_control/clients/add');
+            $location.path('/access_control/clients/create');
         };
 
         $scope.delete = function($event, user)

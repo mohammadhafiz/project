@@ -75,6 +75,16 @@ application.config(['$locationProvider', '$routeProvider',
                     }],
                 },
             })
+            .when('/access_control/clients/create', {
+                controller: 'AccessControlClientsCreateController',
+                templateUrl: 'access_control/clients/create.html',
+                resolve: {
+                    isLogged: ['Auth', function(Auth)
+                    {
+                        return Auth.isLogged();
+                    }],
+                },
+            })
             .when('/access_control/grants', {})
             .when('/access_control/scopes', {})
             .otherwise({
