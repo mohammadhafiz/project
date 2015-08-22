@@ -1,14 +1,14 @@
-application.controller('AccessControlUsersController', ['$location', '$mdDialog', '$mdSidenav', '$scope', '$translate', 'User',
-    function($location, $mdDialog, $mdSidenav, $scope, $translate, User)
+application.controller('AccessControlClientsController', ['$location', '$mdDialog', '$mdSidenav', '$scope', '$translate', 'Client',
+    function($location, $mdDialog, $mdSidenav, $scope, $translate, Client)
     {
         $scope.limit = 50;
         $scope.page = 0;
         $scope.theme = 'red';
-        $scope.users = [];
+        $scope.clients = [];
 
         $scope.add = function()
         {
-            $location.path('/access_control/users/add');
+            $location.path('/access_control/clients/add');
         };
 
         $scope.delete = function($event, user)
@@ -34,14 +34,14 @@ application.controller('AccessControlUsersController', ['$location', '$mdDialog'
             })
             .then(function()
             {
-                return User.delete({
-                    user_id: user.id,
+                return Client.delete({
+                    client_id: client.id,
                 }).$promise;
             })
             .then(function()
             {
-                $scope.users.splice($scope.users.indexOf(user), 1);
-                $location.path('/access_control/users');
+                $scope.clients.splice($scope.clients.indexOf(client), 1);
+                $location.path('/access_control/clients');
             });
         };
 
@@ -51,11 +51,11 @@ application.controller('AccessControlUsersController', ['$location', '$mdDialog'
             options.limit = $scope.limit;
             if (++$scope.page > 1) options.skip = $scope.limit * ($scope.page - 1);
 
-            User.query(options).$promise
-                .then(function(users)
+            Client.query(options).$promise
+                .then(function(clients)
                 {
-                    if (users.data.length < 1) return;
-                    $scope.users = $scope.users.concat(users.data);
+                    if (clients.data.length < 1) return;
+                    $scope.clients = $scope.clients.concat(clients.data);
                     $scope.load();
                 });
         };
@@ -65,9 +65,9 @@ application.controller('AccessControlUsersController', ['$location', '$mdDialog'
             $mdSidenav('menu').open();
         };
 
-        $scope.read = function(userId)
+        $scope.read = function(client)
         {
-            $location.path('/access_control/users/' + userId);
+            $location.path('/access_control/clients/' + client.id);
         };
 
         $scope.regex = function(actual, expected)
