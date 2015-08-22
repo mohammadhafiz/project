@@ -66,7 +66,14 @@ application.config(['$locationProvider', '$routeProvider',
                 },
             })
             .when('/access_control/clients', {
-
+                controller: 'AccessControlClientsController',
+                templateUrl: 'access_control/clients.html',
+                resolve: {
+                    isLogged: ['Auth', function(Auth)
+                    {
+                        return Auth.isLogged();
+                    }],
+                },
             })
             .when('/access_control/grants', {})
             .when('/access_control/scopes', {})

@@ -6,4 +6,84 @@
         md-is-locked-open="$mdMedia('gt-md')">
         <ng-include src="'access_control.html'"></ng-include>
     </md-sidenav>
+
+    <md-content flex
+        layout="column">
+        <md-toolbar class="md-whiteframe-z2"
+            md-scroll-shrink>
+            <div class="md-toolbar-tools"
+                ng-if="theme == 'red'">
+                <md-button class="md-icon-button"
+                    hide-gt-md
+                    ng-click="menu">
+                    <md-tooltip>{{ 'action_menu' | translate }}</md-tooltip>
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h2 class="md-title">{{ 'title_client_management' | translate }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                    ng-click="$parent.theme = 'white'">
+                    <md-tooltip>{{ 'action_search' | translate }}</md-tooltip>
+                    <md-icon>search</md-icon>
+                </md-button>
+                <md-button class="md-icon-button"
+                    ng-click="add()">
+                    <md-tooltip>{{ 'action_add' | translate }}</md-tooltip>
+                    <md-icon>add</md-icon>
+                </md-button>
+            </div>
+
+            <div class="md-toolbar-tools"
+                ng-if="theme == 'white'">
+                <md-button class="md-icon-button"
+                    ng-click="$parent.theme = 'red'">
+                    <md-tooltip>{{ 'action_back' | translate }}</md-tooltip>
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <md-input-container flex
+                    md-no-float>
+                    <br>
+                    <input ng-model="$parent.query.$"
+                        placeholder="{{ 'action_search' | translate }}"
+                        type="search">
+                </md-input-container>
+            </div>
+        </md-toolbar>
+
+        <md-list flex
+            md-virtual-repeat-container>
+            <md-subheader class="md-no-sticky">{{ 'title_record_count' | translate:data }}</md-subheader>
+            <md-list-item class="md-2-line"
+                md-virtual-repeat="client in data = (clients | filter:query:regex | orderBy:'id')"
+                ng-click="read(client)">
+                <md-icon>code</md-icon>
+                <div class="md-list-item-text">
+                    <h3 md-highlight-text="query.$"
+                        md-highlight-flags="gi">
+                        {{ client.name }}
+                    </h3>
+                    <p md-highlight-text="query.$"
+                        md-highlight-flags="gi">
+                        {{ client.id }}
+                    </p>
+                </div>
+                <md-menu md-position-mode="target-right target">
+                    <md-button aria-label="{{ 'action_more' | translate }}"
+                        class="md-icon-button"
+                        ng-click="$mdOpenMenu($event)">
+                        <md-tooltip>{{ 'action_more' | translate }}</md-tooltip>
+                        <md-icon>more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="delete($event, client)">
+                                <md-icon>delete</md-icon>
+                                {{ 'action_delete' | translate }}
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </md-list-item>
+        </md-list>
+    </md-content>
 </md-content>
