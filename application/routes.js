@@ -39,7 +39,7 @@ application.config(['$locationProvider', '$routeProvider',
                     }],
                 },
             })
-            .when('/access_control/users/add', {
+            .when('/access_control/users/create', {
                 controller: 'AccessControlUsersCreateController',
                 templateUrl: 'access_control/users/create.html',
                 resolve: {

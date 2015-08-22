@@ -2,17 +2,16 @@ application.config(['$translateProvider',
     function($translateProvider)
     {
         $translateProvider.translations('en', {
-            'action_add': 'Add',
             'action_back': 'Go back',
             'action_cancel': 'Cancel',
             'action_create': 'Create',
+            'action_create_user': 'Create new user',
             'action_delete': 'Delete',
             'action_login': 'Log in',
             'action_logout': 'Log out',
             'action_menu': 'Menu',
             'action_more': 'More',
             'action_search': 'Search',
-            'action_add_user': 'Add new user',
 
             'dialog_content_delete_record': 'Deleted record cannot be restored.',
             'dialog_title_delete_record': 'Would you like to delete this record?',

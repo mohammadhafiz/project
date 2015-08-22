@@ -6,9 +6,9 @@ application.controller('AccessControlUsersController', ['$location', '$mdDialog'
         $scope.theme = 'red';
         $scope.users = [];
 
-        $scope.add = function()
+        $scope.create = function()
         {
-            $location.path('/access_control/users/add');
+            $location.path('/access_control/users/create');
         };
 
         $scope.delete = function($event, user)
