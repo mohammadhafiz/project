@@ -8,7 +8,7 @@ application.controller('AccessControlUsersReadController', ['$location', '$mdDia
             $location.path('/access_control/users');
         };
 
-        $scope.delete = function($event, id)
+        $scope.delete = function($event, user)
         {
             $translate([
                 'dialog_title_delete_record',
@@ -24,14 +24,15 @@ application.controller('AccessControlUsersReadController', ['$location', '$mdDia
                     .ok(translations.action_delete)
                     .cancel(translations.action_cancel)
                     .targetEvent($event);
-            }).then(function(dialog)
+            })
+            .then(function(dialog)
             {
                 return $mdDialog.show(dialog);
             })
             .then(function()
             {
                 return User.delete({
-                    user_id: id,
+                    user_id: user.id,
                 }).$promise;
             })
             .then(function()
