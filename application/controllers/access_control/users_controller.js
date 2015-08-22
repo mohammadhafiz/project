@@ -65,9 +65,9 @@ application.controller('AccessControlUsersController', ['$location', '$mdDialog'
             $mdSidenav('menu').open();
         };
 
-        $scope.read = function(userId)
+        $scope.read = function(user)
         {
-            $location.path('/access_control/users/' + userId);
+            $location.path('/access_control/users/' + user.id);
         };
 
         $scope.regex = function(actual, expected)

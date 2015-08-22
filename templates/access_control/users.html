@@ -46,7 +46,7 @@
         </md-toolbar>
         <md-list flex md-virtual-repeat-container>
             <md-subheader class="md-no-sticky">{{ 'title_record_count' | translate:data }}</md-subheader>
-            <md-list-item ng-click="read(user.id)"
+            <md-list-item ng-click="read(user)"
                 md-virtual-repeat="user in data = (users | filter:query:regex | orderBy:'username')">
                 <md-icon>person</md-icon>
                 <p md-highlight-text="query.username"
