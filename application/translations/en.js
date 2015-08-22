@@ -18,9 +18,11 @@ application.config(['$translateProvider',
             'dialog_title_delete_record': 'Would you like to delete this record?',
 
             'label_created_at': 'Created At',
+            'label_id': 'Identity',
             'label_name': 'Name',
             'label_password': 'Password',
             'label_password_confirmation': 'Password Confirmation',
+            'label_secret': 'Secret',
             'label_updated_at': 'Updated At',
             'label_username': 'Username',
 
