@@ -101,6 +101,22 @@ application.config(['$locationProvider', '$routeProvider',
                     }],
                 },
             })
+            .when('/access_control/clients/:client_id/update', {
+                controller: 'AccessControlClientsUpdateController',
+                templateUrl: 'access_control/clients/update.html',
+                resolve: {
+                    isLogged: ['Auth', function(Auth)
+                    {
+                        return Auth.isLogged();
+                    }],
+                    client: ['$route', 'Client', function($route, Client)
+                    {
+                        return Client.get({
+                            client_id: $route.current.params.client_id,
+                        }).$promise;
+                    }],
+                },
+            })
             .when('/access_control/grants', {})
             .when('/access_control/scopes', {})
             .otherwise({

@@ -75,5 +75,10 @@ application.controller('AccessControlClientsController', ['$location', '$mdDialo
             return actual.match(new RegExp(expected, 'i'));
         };
 
+        $scope.update = function(client)
+        {
+            $location.path('/access_control/clients/' + client.id + '/update');
+        };
+
         $scope.load();
     }]);

@@ -13,6 +13,8 @@ application.config(['$translateProvider',
             'action_menu': 'Menu',
             'action_more': 'More',
             'action_search': 'Search',
+            'action_update': 'Update',
+            'action_update_client': 'Update client',
 
             'dialog_content_delete_record': 'Deleted record cannot be restored.',
             'dialog_title_delete_record': 'Would you like to delete this record?',
@@ -45,7 +47,7 @@ application.config(['$translateProvider',
             'toast_validation_failed': 'Validation failed on server.',
 
             'validation_maxlength_24': 'This field may not be greater than 24 characters.',
-            'validation_maxlength_250': 'This field may not be greater than 250 characters.',
+            'validation_maxlength_40': 'This field may not be greater than 40 characters.',
             'validation_minlength_4': 'This field must be at least 4 characters.',
             'validation_required': 'This field is required.',
         });

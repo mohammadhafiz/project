@@ -40,4 +40,9 @@ application.controller('AccessControlClientsReadController', ['$location', '$mdD
                 $location.path('/access_control/clients');
             });
         };
+
+        $scope.update = function(client)
+        {
+            $location.path('/access_control/clients/' + client.id + '/update');
+        };
     }]);

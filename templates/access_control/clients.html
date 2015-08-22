@@ -76,6 +76,12 @@
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
+                            <md-button ng-click="update(client)">
+                                <md-icon>edit</md-icon>
+                                {{ 'action_update' | translate }}
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
                             <md-button ng-click="delete($event, client)">
                                 <md-icon>delete</md-icon>
                                 {{ 'action_delete' | translate }}
